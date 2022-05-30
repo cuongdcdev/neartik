@@ -5,13 +5,14 @@ import "../assets/css/app.css";
 import cx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import PostCard from "../components/PostCard";
+import VideoGrid from "../components/VideoGrid";
 
 
 // const { networkId } = getConfig(process.env.NODE_ENV || 'development')
 
 
 
-function Home() {
+function Single() {
     const [showNotification, setShowNotification] = useState(false)
     const [loading, setload] = useState(null);
     const [data, setData] = useState([
@@ -24,7 +25,7 @@ function Home() {
 
     useEffect(() => {
 
-        console.log("init home");
+        console.log("init single page ");
     }, []);
 
 
@@ -43,18 +44,21 @@ function Home() {
 
 
     return (
-        <div id="home-page">
+        <div id="single-page">
             {
-                Array.from({ length: 10 }).map((e, i) => (
-                    <div className="post" key={Math.random()}>
-                      <PostCard/>
-                    </div>
-                ))
-            }
 
+                <div className="post" key={Math.random()}>
+                    <PostCard />
+                </div>
+
+            }
+            <div className="related-posts">
+                <h3>More from author</h3>
+                <VideoGrid/>
+            </div>
         </div>
     );
 }
 
-export default Home;
+export default Single;
 

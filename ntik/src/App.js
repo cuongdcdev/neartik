@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./assets/css/app.css";
-import Swiper, { Navigation } from "swiper";
-import "swiper/swiper-bundle.css";
-Swiper.use([Navigation]);
 import { BrowserRouter, Link, Routes, Route } from 'react-router-dom'
 import { login, logout } from './utils'
 import getConfig from './config'
 const { networkId } = getConfig(process.env.NODE_ENV || 'development')
+import Comment from "./components/Comment";
+import Single from "./pages/Single";
 
 //Uis 
 import Header from "./components/Header";
@@ -80,17 +79,17 @@ function MenuBar() {
   return (
     <>
       <BrowserRouter>
-        <Box sx={{ pb: 7 }} >
+        <Box >
           <CssBaseline />
           <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 9999 }} elevation={4}>
             <BottomNavigation
               showLabels
-
             >
               <BottomNavigationAction to="/" component={Link} label="Home" icon={<HomeIcon />} />
               <BottomNavigationAction to="/upload" component={Link} label="Upload" icon={<AddCircle />} />
               <BottomNavigationAction to="/liked" component={Link} label="Favorites" icon={<FavoriteIcon />} />
               <BottomNavigationAction to="/profile" component={Link} label="Profile" icon={<Person />} />
+              
             </BottomNavigation>
           </Paper>
         </Box>
@@ -100,6 +99,8 @@ function MenuBar() {
           <Route path="/upload" element={<Upload />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/liked" element={<Liked />} />
+          <Route path="/comment" element={<Comment />} />
+          <Route path="/single" element={<Single/>} />
         </Routes>
       </BrowserRouter>
 

@@ -6,8 +6,6 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import ReportOutlinedIcon from '@mui/icons-material/ReportOutlined';
-import MenuBar from "./Menu"
-import Header from "./Header";
 
 import imgPlayBtn from "../assets/img/play.png";
 
@@ -98,10 +96,9 @@ function Video({ source }) {
   };
   return (
     <>
-      <div id="video-container" ref={ref}>
+      <div className="video-container" ref={ref}>
         {/* <img ref={playRef} id="play-btn" src={process.env.PUBLIC_URL + '/img/play.png'} alt="play" /> */}
         <img ref={playRef} id="play-btn" src={imgPlayBtn} alt="play" />
-
 
         <div id="btns">
           <div id="like-btn">
@@ -139,8 +136,8 @@ function Video({ source }) {
           <video
             ref={videoRef}
             onClick={videoPlay}
-            width="450"
-            height="900"
+            width="auto"
+            height="100%"
             src={source.substring(0, 32) + "DASH_480.mp4?source=fallback"}
             type="video/mp4"
             preload="auto"

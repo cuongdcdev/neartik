@@ -1032,6 +1032,13 @@
     "@babel/plugin-transform-react-jsx-development" "^7.12.17"
     "@babel/plugin-transform-react-pure-annotations" "^7.12.1"
 
+"@babel/runtime@^7.12.5":
+  version "7.18.3"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.18.3.tgz#c7b654b57f6f63cf7f8b418ac9ca04408c4579f4"
+  integrity sha512-38Y8f7YUhce/K7RMwTp7m0uCumpv9hZkitCbBClqQIow1qSbCvGkcegKOXpEWCQLfWmevgRiWokZ1GkpfhbZug==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/runtime@^7.13.10", "@babel/runtime@^7.17.2", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.3", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7":
   version "7.18.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.18.0.tgz#6d77142a19cb6088f0af662af1ada37a604d34ae"
@@ -1673,6 +1680,31 @@
   dependencies:
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
+
+"@mui-treasury/components@^1.10.1":
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/@mui-treasury/components/-/components-1.10.1.tgz#9626d4156f097bfc9d19d261d4d0d91352a8186e"
+  integrity sha512-k2TYPopGscPcG112ZbEiZxw2ud0Umn2mWYG3+hXbAw6WXQyATpTzosXzReWHAlFoyuACezDZMv9CU6E4B8/s5A==
+  dependencies:
+    "@mui-treasury/styles" "^1.13.1"
+    "@mui-treasury/utils" "^0.4.1"
+    use-deep-compare-effect "^1.3.0"
+
+"@mui-treasury/styles@^1.13.1":
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/@mui-treasury/styles/-/styles-1.13.1.tgz#96c86f362056eaeb528740bf4cf128d3cd5c56b7"
+  integrity sha512-vfAx8RWFnEVBSTK2KbgU6n4EwYXzWSU3VRsUUbRkuPXgdc8PO6O9/HAht8s/qMOCCa+UZ/s+dfjvN9iXPmW5SA==
+  dependencies:
+    "@mui-treasury/utils" "^0.4.1"
+    color "^3.1.2"
+
+"@mui-treasury/utils@^0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@mui-treasury/utils/-/utils-0.4.1.tgz#075645cec98b2e976766e505d9ac8b52778438b3"
+  integrity sha512-XcJOUrQodx2VCouk6uvYw+MChVGXPy1abe7PxqpxIGEr6s1QwV8HhgA4q/+eq0//IQ6oDXGlym4PSDO3Yh/lHA==
+  dependencies:
+    lodash.get "^4.4.2"
+    lodash.isequal "^4.5.0"
 
 "@mui/base@5.0.0-alpha.81":
   version "5.0.0-alpha.81"
@@ -3187,7 +3219,7 @@ color-string@^1.6.0:
     color-name "^1.0.0"
     simple-swizzle "^0.2.2"
 
-color@^3.0.0:
+color@^3.0.0, color@^3.1.2:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/color/-/color-3.2.1.tgz#3544dc198caf4490c3ecc9a790b54fe9ff45e164"
   integrity sha512-aBl7dZI9ENN6fUGC7mWpMTPNHmWUSNan9tuWN6ahh5ZLNk9baLJOnSMlrQkHcrfFgz2/RigjUVAjdx36VcemKA==
@@ -3773,6 +3805,11 @@ depd@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.2.tgz#9bcd52e14c097763e749b274c4346ed2e560b5a9"
   integrity sha1-m81S4UwJd2PnSbJ0xDRu0uVgtak=
+
+dequal@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/dequal/-/dequal-2.0.2.tgz#85ca22025e3a87e65ef75a7a437b35284a7e319d"
+  integrity sha512-q9K8BlJVxK7hQYqa6XISGmBZbtQQWVXSrRrWreHC94rMt1QL/Impruc+7p2CYSYuVIUr+YCt6hjrs1kkdJRTug==
 
 des.js@^1.0.0:
   version "1.0.1"
@@ -6512,6 +6549,16 @@ lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
   integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
+
+lodash.get@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
+  integrity sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=
+
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+  integrity sha1-QVxEePK8wwEgwizhDtMib30+GOA=
 
 lodash.memoize@^4.1.2:
   version "4.1.2"
@@ -9343,10 +9390,10 @@ svgo@^1.0.0, svgo@^1.3.2:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-swiper@^8.1.5:
-  version "8.1.5"
-  resolved "https://registry.yarnpkg.com/swiper/-/swiper-8.1.5.tgz#95e55779c6163619491d1ebd0c7c59f1bb8a6e58"
-  integrity sha512-wJv4Ro5R4FunzN4WADpag/i3p0BkDOATwCDbBKnGooENgHKFWxqDAe25kK6PLI6+pwM0hJQrpsRKGJXXkIeIHg==
+swiper@^8.1.6:
+  version "8.1.6"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-8.1.6.tgz#740613aa453c85b11223e5bbf7cd3656488b1997"
+  integrity sha512-KqnqIBbIQaIiG/sK2ckcQZbqK38486WlvJe99s2KOCu8jOOQGra6cdShdI9LDyh8DALV/5nwycczFmmNWhxs2A==
   dependencies:
     dom7 "^4.0.4"
     ssr-window "^4.0.2"
@@ -9828,6 +9875,14 @@ usb@^1.7.0:
   dependencies:
     node-addon-api "^4.2.0"
     node-gyp-build "^4.3.0"
+
+use-deep-compare-effect@^1.3.0:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/use-deep-compare-effect/-/use-deep-compare-effect-1.8.1.tgz#ef0ce3b3271edb801da1ec23bf0754ef4189d0c6"
+  integrity sha512-kbeNVZ9Zkc0RFGpfMN3MNfaKNvcLNyxOAAd9O4CBZ+kCBXXscn9s/4I+8ytUER4RDpEYs5+O6Rs4PqiZ+rHr5Q==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    dequal "^2.0.2"
 
 use@^3.1.0:
   version "3.1.1"

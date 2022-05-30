@@ -2,30 +2,49 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background-color: black;
-}
-html {
-  overflow: hidden;
-}
-video {
-  height: 900px;
-  width: 450px;
-  object-fit: cover;
+  max-width: 500px;
+  margin: 0 auto;
+  display: block;
 }
 
-audio {
-  display: none;
-  overflow: hidden;
-}
-
-.swiper-container {
-  height: 100%;
-}
 h2 {
   text-align: center;
   z-index: 999;
 }
-#video-container {
+
+
+#header {
+  position: fixed;
+  z-index: 9999;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: none;
+  color: black;
+  text-align: center;
+  background: white;
+}
+
+.post {
+  border-radius: 3px;
+  margin: 15px 0px;
+}
+
+.btn-wrap {
+  position: relative;
+  width:100%;
+}
+
+.donate-btn {
+  width: 35px !important;
+  position:absolute !important;
+  right:10px !important;
+
+}
+
+.donate-btn img {
+  width: 100%;
+}
+
+.video-container {
   height: 100%;
   width: 450px;
   position: relative;
@@ -38,15 +57,11 @@ h2 {
 .App {
   display: flex;
   justify-content: center;
+  min-width: 60%;
+
 }
-#body, #video-scroll {
-  height: 845px;
-  position: relative;
-  top: 5em;
-  width: 450px;
-  overflow-x: hidden;
-  border-radius: 30px 30px 30px 30px;
-}
+
+
 h1 {
   text-align: center;
   z-index: 999;
@@ -58,6 +73,7 @@ h1 {
   height: 100px;
   display: none;
 }
+
 #heart {
   position: absolute;
   color: white;
@@ -65,6 +81,7 @@ h1 {
 
   cursor: pointer;
 }
+
 #heart2 {
   position: absolute;
   top: 18em;
@@ -74,6 +91,7 @@ h1 {
   display: none;
   color: white;
 }
+
 #btns {
   position: absolute;
   left: 83%;
@@ -82,9 +100,11 @@ h1 {
   display: flex;
   flex-direction: column;
 }
+
 #icons {
   color: white;
 }
+
 h1 {
   z-index: 7;
   position: absolute;
@@ -93,23 +113,26 @@ h1 {
   color: white;
   text-align: left;
 }
+
+/* 
 #logo {
-  position: absolute;
-  /* height: 21px; */
+  position: fixed;
+  height: 21px;
   left: 10px;
   top: -5px;
   font-size: 15px;
   text-shadow: 2px 2px #e70909, -3px -3px 2.4px #2bc5e0;
-}
-#loading {
+} */
+
+/* #loading {
   color: white;
   display: flex;
   justify-content: center;
   position: relative;
   top: 18em;
-}
+} */
 
-#title {
+/* #title {
   z-index: 9999;
   position: relative;
   color: white;
@@ -117,7 +140,8 @@ h1 {
   left: 1em;
   bottom: 3.7em;
   font-size: 0.9em;
-}
+} */
+
 #like-count {
   color: white;
   position: absolute;
@@ -125,6 +149,7 @@ h1 {
   bottom: -1em;
   left: 1.75em;
 }
+
 #author {
   text-decoration: underline;
   position: relative;
@@ -139,57 +164,70 @@ h1 {
   letter-spacing: 0.8px;
   font-weight: bolder;
 }
+
 #btns {
   display: flex;
   justify-content: center;
 }
 
 ::-webkit-scrollbar {
-  width: 0px; /* Remove scrollbar space */
-  background: transparent; /* Optional: just make scrollbar invisible */
+  width: 0px;
+  /* Remove scrollbar space */
+  background: transparent;
+  /* Optional: just make scrollbar invisible */
 }
 
-#menu{
+#menu {
   position: absolute;
-  bottom:0px;
-  height:25px;
-  background:red;
+  bottom: 0px;
+  height: 25px;
+  background: red;
   width: 100%;
   z-index: 999;
 }
 
-#menu .menu-btn{
-  float:left;
-  padding:0px 5px;
+#menu .menu-btn {
+  float: left;
+  padding: 0px 5px;
 
 }
 
 
 @media only screen and (max-width: 550px) {
-  #video-container {
-    width: 100vw !important;
-    border-radius: 0;
-    display: flex;
-  }
 
-  video {
-    border-radius: 0;
-    width: 100%;
-    object-fit: cover;
-    height: 100%;
-  }
-  #body, #video-scroll {
-    width: 100vw !important;
-    top: 0;
-    border-radius: 0;
-    z-index: inherit;
-    height: 100vh; /* This is for browsers that don't support custom properties */
-    height: calc(var(--vh, 1vh) * 100);
-  }
+
   #author-title {
     top: 78%;
   }
+
   #btns {
     top: 55%;
   }
+}
+
+video {
+  border-radius: 0;
+  width: 100%;
+  text-align: center;
+  background: #fff;
+}
+
+.upload-section {
+  margin-bottom: 15px;
+}
+
+
+.comment-wrapper,
+.MuiDrawer-paperAnchorBottom,
+.comment-post {
+  max-width: 750px;
+  margin: 0 auto;
+  display: block;
+  padding-bottom: 50px;
+}
+
+#body {
+  padding-top: 75px;
+  padding-bottom: 75px;
+  max-width: 500px;
 }
