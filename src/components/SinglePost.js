@@ -29,7 +29,7 @@ function getDateFromTimeStamp(unixTimeStamp) {
     return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2) + '/' + date.getFullYear() + ' ' + ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2);
 }
 
-export default function PostCard(props) {
+export default function SinglePost(props) {
     const [post, setPost] = useState({});
     const [expandComment, setExpandComment] = React.useState(false);
     const [donate, setDonate] = React.useState(false);
@@ -118,10 +118,6 @@ export default function PostCard(props) {
 
             {postThumbnail()}
 
-
-            {/* <ReactWebMediaPlayer title="test video" video="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4" /> */}
-            {/* <video controls loop src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4" ></video>
-            <video controls loop src="https://dl.espressif.com/dl/audio/ff-16b-2c-44100hz.mp3" ></video> */}
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
                     <a href={`/@${post.author}/p${post.id}`} >
@@ -141,7 +137,7 @@ export default function PostCard(props) {
                 </IconButton>
 
                 <IconButton aria-label='comment' onClick={openCommentSection}>
-                    <CommentIcon />
+                    <CommentIcon /> ( {cmts.length} )
                 </IconButton>
 
                 <IconButton className="donate-btn" aria-label="donate" onClick={openDonateSection}>
@@ -150,59 +146,49 @@ export default function PostCard(props) {
             </CardActions>
             {/* donate section   */}
             <DonateBox setOpen={setDonate} open={donate} receiver={post.author} />
+
             {/* end donate section  */}
 
             {/* comment section  */}
             <div className="comments-section" sx={{ padding: 14, height: "50%", padding: 14, height: "50%", maxWidth: "750px", paddingBottom: "50px", margin: "auto" }}>
-                <Drawer anchor="bottom" open={expandComment} className="comment-wrapper"
-                    sx={{ padding: 14, height: "50%", maxWidth: "750px", paddingBottom: "50px", margin: "auto" }}
-                    ModalProps={{
-                        keepMounted: true,
-                    }} >
 
-                    <div className="comment-header" style={{ position: "fixed" }}>
-                        <IconButton onClick={() => setExpandComment(false)}>
-                            <Close />
+
+                <Paper style={{ zIndex: 9999, width: "100%" }} className="comment-post">
+
+                    <Grid container wrap="nowrap">
+                        <InputBase inputRef={inputRef}
+                            sx={{ ml: 1, flex: 1 }}
+                            placeholder="Leave a comment"
+                            className="single-comment-input"
+                        />
+                        <IconButton type="button" onClick={() => { addComment() }} sx={{ p: '10px' }}>
+                            <AddCircle />
                         </IconButton>
-                    </div>
+                    </Grid>
+                </Paper>
 
-                    <Paper style={{ padding: "15px", position: "fixed", bottom: "50px", zIndex: 9999, width: "100%" }} className="comment-post">
-                        <Grid container wrap="nowrap" spacing={2}>
-                            <InputBase inputRef={inputRef}
-                                sx={{ ml: 1, flex: 1 }}
-                                placeholder="Leave a comment"
-                            />
-                            <IconButton type="button" onClick={() => { addComment() }} sx={{ p: '10px' }}>
-                                <AddCircle />
-                            </IconButton>
-                        </Grid>
-                    </Paper>
+                <div style={{ paddingBottom: "25px", paddingTop: "25px" }}></div>
 
-                    <div style={{ paddingBottom: "25px", paddingTop: "25px" }}></div>
+                {
+                    Array.from(cmts).map((e) => (
+                        <Paper style={{ padding: "20px 20px" }} key={Math.random()} >
+                            <Grid container wrap="nowrap" spacing={2}>
 
-                    {
-                        Array.from(cmts).map((e) => (
-                            <Paper style={{ padding: "20px 20px" }} key={Math.random()} >
-                                <Grid container wrap="nowrap" spacing={2}>
-
-                                    <Grid item>
-                                        <Avatar alt={e.id}> {e.uid.substring(0, 3)} </Avatar>
-                                    </Grid>
-
-                                    <Grid item xs zeroMinWidth>
-                                        <h4 className="cmtUid" style={{ margin: 0, textAlign: "left" }}>{e.uid}</h4>
-                                        <p className="cmtContent" style={{ textAlign: "left" }}>{e.cmt}</p>
-                                        <p className="cmtPostedAt" style={{ textAlign: "left", color: "gray", fontSize: "70%" }}>
-                                            posted at: {getDateFromTimeStamp(e.t)}
-                                        </p>
-                                    </Grid>
+                                <Grid item>
+                                    <Avatar alt={e.id}> {e.uid.substring(0, 3)} </Avatar>
                                 </Grid>
-                            </Paper>
-                        ))
-                    }
 
-
-                </Drawer>
+                                <Grid item xs zeroMinWidth>
+                                    <h4 className="cmtUid" style={{ margin: 0, textAlign: "left" }}>{e.uid}</h4>
+                                    <p className="cmtContent" style={{ textAlign: "left" }}>{e.cmt}</p>
+                                    <p className="cmtPostedAt" style={{ textAlign: "left", color: "gray", fontSize: "70%" }}>
+                                        posted at: {getDateFromTimeStamp(e.t)}
+                                    </p>
+                                </Grid>
+                            </Grid>
+                        </Paper>
+                    ))
+                }
 
 
 

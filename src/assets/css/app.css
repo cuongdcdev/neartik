@@ -268,7 +268,6 @@ video {
   max-width: 500px;
 }
 
-/* single post  */
 .post .MuiCardHeader-title{
   font-weight:bold;
   font-size:16px;
@@ -284,7 +283,15 @@ video {
   
 }
 
+
+/* single post  */
 #single-page .post .MuiPaper-root.MuiPaper-outlined{
   border: none !important;
+
 } 
 
+#single-page .single-comment-input{
+  margin-bottom:0px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 10px;
+}

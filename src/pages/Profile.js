@@ -14,7 +14,7 @@ export default function Profile() {
     const accountId = params.walletid ? params.walletid : window.accountId;
 
     function showLogout() {
-        if (params.walletid == window.accountId) {
+        if (!params.walletid) {
             return (<Button color="error" size="small" variant="outlined"
                 onClick={() => { return confirm("Confirm Logout?") ? logout() : "" }}>logout</Button>)
         }

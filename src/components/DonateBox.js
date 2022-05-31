@@ -7,28 +7,37 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { stepButtonClasses } from "@mui/material";
+import {utils} from "near-api-js";
 
 export default function DonateBox(props) {
     const [open, setOpen] = React.useState(false);
     const inputRef = useRef();
 
-    const handleClickOpen = () => { 
+    const handleClickOpen = () => {
         setOpen(true);
     };
 
     const handleClose = () => {
         setOpen(false);
-        props.setDonate(false);
+        props.setOpen(false);
     };
 
     const handleDonate = () => {
-        console.log("donate clicked: " , inputRef.current.value );
-        
+        console.log("donate clicked: ", inputRef.current.value);
+        var amount = utils.format.parseNearAmount(inputRef.current.value) ;
+
+        window.walletConnection.account().sendMoney(props.receiver, amount)
+            .then(ob => {
+                console.log("transfer done", ob)
+            })
+            .catch(err => {
+                console.log("transfer err", err)
+            })
     };
 
     useEffect(() => {
-        setOpen(props.donate);
-    }, [props.donate]);
+        setOpen(props.open);
+    }, [props.open]);
 
 
     return (
@@ -46,10 +55,11 @@ export default function DonateBox(props) {
             <DialogContent>
 
                 <DialogContentText>
+                    <p>💰 {props.receiver}</p>
                     <TextField defaultValue="1" fullWidth label="NEAR" variant="standard" autoFocus margin="dense"
-                     inputRef={inputRef}
-                     type="number"
-                      />
+                        inputRef={inputRef}
+                        type="number"
+                    />
                 </DialogContentText>
 
             </DialogContent>

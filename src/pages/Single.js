@@ -6,6 +6,7 @@ import PostCard from "../components/PostCard";
 import PostGrid from "../components/PostGrid";
 
 import { useParams } from "react-router-dom";
+import SinglePost from "../components/SinglePost";
 
 
 // const { networkId } = getConfig(process.env.NODE_ENV || 'development')
@@ -29,6 +30,8 @@ function Single() {
         .then( ob => {
             setPost( JSON.parse(ob) );
             console.log("get post " , JSON.parse(ob) );
+            window.document.title = post.title;
+
         } )
         .catch( err =>{
             console.log("get post err" , err );
@@ -73,7 +76,7 @@ function Single() {
             {
 
                 <div className="post" key={Math.random()}>
-                    <PostCard post={ post } cmts={cmts} />
+                    <SinglePost post={ post } cmts={cmts} />
                 </div>
 
             }
