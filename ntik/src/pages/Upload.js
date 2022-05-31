@@ -135,7 +135,7 @@ export default function Upload() {
 
                     <Tabs value={menuUpload} onChange={handleMenuChange} sx={{ marginBottom: "15px" }}>
                         <Tab icon={<LocalFlorist />} label="Basic" onClick={() => setPostType("basic")} />
-                        <Tab icon={<Collections />} label="Album" onClick={() => setPostType("album")} />
+                        {/* <Tab icon={<Collections />} label="Album" onClick={() => setPostType("album")} /> */}
                         <Tab icon={<OndemandVideo />} label="Media" onClick={() => setPostType("media")} />
                     </Tabs>
 

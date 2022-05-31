@@ -53,7 +53,27 @@ export default function PostCardHome(props) {
         console.log("posts ", props.post, props.cmts);
     }, []);
 
+    function postThumbnail() {
+        if (post.type == "basic") {
+            return (
+                <CardMedia
+                    component="img"
+                    height="auto"
+                    sx={{ maxHeight: "500px" }}
+                    image={post.media}
+                    alt={post.title}
+                />
+            )
+        }
 
+        if (post.type == "media") {
+            return (
+                <video controls loop
+                    height="auto"
+                    src={post.media} >{post.title}</video>
+            )
+        }
+    }
     function addComment() {
         var inputCmt = inputRef.current.value;
         if (inputCmt.trim(0).length == 0) return;
@@ -88,28 +108,20 @@ export default function PostCardHome(props) {
                 avatar={
                     <a href={`/@${post.author}`} title={post.author}>
                         <Avatar sx={{ bgcolor: red[500] }}>
+                            {post.author}
                         </Avatar>
                     </a>
                 }
-
                 title={post.title}
                 subheader={getDateFromTimeStamp(post.date)}
             />
-            <a href={`/@${post.author}/p${post.id}`} >
-                <CardMedia
-                    component="img"
-                    height="auto"
-                    sx={{ maxHeight: "500px" }}
-                    image={post.media}
-                    alt={post.title}
-                />
-            </a>
-            {/* <ReactWebMediaPlayer title="test video" video="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4" /> */}
-            {/* <video controls loop src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4" ></video>
-            <video controls loop src="https://dl.espressif.com/dl/audio/ff-16b-2c-44100hz.mp3" ></video> */}
+            {postThumbnail()}
+
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                    {post.desc}
+                    <a href={`/@${post.author}/p${post.id}`} >
+                        {post.desc}
+                    </a>
                 </Typography>
             </CardContent>
 

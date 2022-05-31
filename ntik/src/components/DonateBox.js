@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -10,8 +10,9 @@ import { stepButtonClasses } from "@mui/material";
 
 export default function DonateBox(props) {
     const [open, setOpen] = React.useState(false);
+    const inputRef = useRef();
 
-    const handleClickOpen = () => {
+    const handleClickOpen = () => { 
         setOpen(true);
     };
 
@@ -21,7 +22,7 @@ export default function DonateBox(props) {
     };
 
     const handleDonate = () => {
-        console.log("donate clicked");
+        console.log("donate clicked: " , inputRef.current.value );
 
     };
 
@@ -45,7 +46,10 @@ export default function DonateBox(props) {
             <DialogContent>
 
                 <DialogContentText>
-                    <TextField defaultValue="1" fullWidth label="NEAR" variant="standard" autoFocus margin="dense" type="number" />
+                    <TextField defaultValue="1" fullWidth label="NEAR" variant="standard" autoFocus margin="dense"
+                     inputRef={inputRef}
+                     type="number"
+                      />
                 </DialogContentText>
 
             </DialogContent>

@@ -110,13 +110,13 @@ const MediaUploader = (props) => {
                 <label htmlFor="contained-button-file">
                     <input required
                         id="contained-button-file"
-                        accept="image/*"
+                        accept="video/*,audio/*"
                         type='file'
                         onChange={(e) => createPreview(e)}
                         className="hideBtn"
                     />
                     <Button variant="contained" component="span" startIcon={<FileUpload />} sx={{ width: "100%" }}>
-                        Upload Photo
+                        Upload Audio or Video
                     </Button>
                 </label>
 

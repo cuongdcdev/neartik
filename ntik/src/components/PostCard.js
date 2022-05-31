@@ -50,7 +50,7 @@ export default function PostCard(props) {
     useEffect(() => {
         setCmts(props.cmts);
         setPost(props.post);
-        console.log("posts " , props.post  , props.cmts );
+        console.log("posts ", props.post, props.cmts);
     }, []);
 
 
@@ -79,7 +79,27 @@ export default function PostCard(props) {
             })
         console.log(cmts);
     }
+    function postThumbnail() {
+        if (post.type == "basic") {
+            return (
+                <CardMedia
+                    component="img"
+                    height="auto"
+                    sx={{ maxHeight: "500px" }}
+                    image={post.media}
+                    alt={post.title}
+                />
+            )
+        }
 
+        if (post.type == "media") {
+            return (
+                <video controls loop
+                    height="auto"
+                    src={post.media} >{post.title}</video>
+            )
+        }
+    }
 
     return (
 
@@ -93,22 +113,20 @@ export default function PostCard(props) {
                 }
 
                 title={post.title}
-                subheader={getDateFromTimeStamp( post.date )}
+                subheader={getDateFromTimeStamp(post.date)}
             />
-            <CardMedia
-                component="img"
-                height="auto"
-                sx={{ maxHeight: "500px" }}
-                image={post.media}
-                alt={post.title}
-            />
+
+            {postThumbnail()}
+
 
             {/* <ReactWebMediaPlayer title="test video" video="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4" /> */}
             {/* <video controls loop src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4" ></video>
             <video controls loop src="https://dl.espressif.com/dl/audio/ff-16b-2c-44100hz.mp3" ></video> */}
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                  { post.desc }
+                    <a href={`/@${post.author}/p${post.id}`} >
+                        {post.desc}
+                    </a>
                 </Typography>
             </CardContent>
 
