@@ -23,7 +23,7 @@ export default function DonateBox(props) {
 
     const handleDonate = () => {
         console.log("donate clicked: " , inputRef.current.value );
-
+        
     };
 
     useEffect(() => {
