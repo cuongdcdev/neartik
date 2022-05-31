@@ -83,7 +83,7 @@ export function getPostsFrom(accountId: string, from: i32, to: i32): string[] {
 export function setPostId(postId: string  ):void{
   let posts = new PersistentUnorderedMap<string, string>("posts");
   if( !posts.get(postId) ){
-    posts.set( postId, Context.sender );
+    posts.set( postId, Context.sender + "|" + postId );
   }
 }
 

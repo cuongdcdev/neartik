@@ -52,11 +52,12 @@ export default function Upload() {
             //set post id first 
             window.contract.setPostId({ postId: postObject.id }).then(() => {
                 //upload post 
-                window.contract.addPost({ postId: postObject.id, postObject: JSON.stringify(postObject) }).then((rs) => {
+                window.contract.addPost({ postId: postObject.id, postObject: JSON.stringify(postObject) })
+                .then((rs) => {
                     console.log("saved to NEAR! ");
                     console.log(rs);
                     setLoading(false);
-
+                    
                 }).catch(err => {
                     console.log(err);
                     setLoading(false);
