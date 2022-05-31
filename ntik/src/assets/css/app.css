@@ -206,6 +206,8 @@ h1 {
   z-index: 999;
 }
 
+
+
 #menu .menu-btn {
   float: left;
   padding: 0px 5px;
@@ -265,3 +267,24 @@ video {
   padding-bottom: 75px;
   max-width: 500px;
 }
+
+/* single post  */
+.post .MuiCardHeader-title{
+  font-weight:bold;
+  font-size:16px;
+}
+
+.post .MuiCardHeader-subheader {
+  font-size:11px;
+}
+
+.post .MuiCardContent-root .MuiTypography-body2 {
+  font-size:15px;
+  margin:0px;
+  
+}
+
+#single-page .post .MuiPaper-root.MuiPaper-outlined{
+  border: none !important;
+} 
+
