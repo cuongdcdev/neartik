@@ -1,5 +1,4 @@
-import React, { useState, useRef } from "react";
-import { styled } from '@mui/material/styles';
+import React, { useState, useRef, useEffect } from "react";
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -16,28 +15,13 @@ import { Avatar, Grid, Paper } from "@material-ui/core";
 import { Drawer, InputBase } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import { AddCircle } from "@mui/icons-material";
-
+import { v4 as uuid } from "uuid";
 import neariconimg from "../assets/img/nearicon.png";
 import DonateBox from "./DonateBox";
 
 // import ReactWebMediaPlayer from 'react-web-media-player';
 
-const ExpandMore = styled((props) => {
-    const { expand, ...other } = props;
-    return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-        duration: theme.transitions.duration.shortest,
-    }),
-}));
 
-
-
-
-const imgLink =
-    "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260";
 
 
 function getDateFromTimeStamp(unixTimeStamp) {
@@ -45,7 +29,8 @@ function getDateFromTimeStamp(unixTimeStamp) {
     return ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2) + '/' + date.getFullYear() + ' ' + ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2);
 }
 
-export default function PostCard() {
+export default function PostCard(props) {
+    const [post, setPost] = useState({});
     const [expandComment, setExpandComment] = React.useState(false);
     const [donate, setDonate] = React.useState(false);
 
@@ -54,27 +39,44 @@ export default function PostCard() {
         setExpandComment(!expandComment);
         console.log("set expandcomment", expandComment);
     }
-
     const openDonateSection = () => {
         setDonate(true);
         console.log("open donate section ")
     }
 
-
     const inputRef = useRef(null);
     const [cmts, setCmts] = useState([]);
+
+    useEffect(() => {
+        setCmts(props.cmts);
+        setPost(props.post);
+        console.log("posts " , props.post  , props.cmts );
+    }, []);
+
 
     function addComment() {
         var inputCmt = inputRef.current.value;
         if (inputCmt.trim(0).length == 0) return;
         console.log("cmt subbmited! ", inputCmt);
+
         var cmt2 = Array.from(cmts);
-        setCmts([{
-            "uid": "cuongdcdev.near",
+
+        const cmtObject = {
+            "id": uuid(),
+            "uid": window.accountId,
             "cmt": inputRef.current.value,
             "t": Date.now()
-        }, ...cmts]);
+        };
+
+        setCmts([cmtObject, ...cmts]);
         inputRef.current.value = "";
+        window.contract.setComment({ postId: post.id, commentId: cmtObject.id, commentObject: JSON.stringify(cmtObject) })
+            .then(ob => {
+                console.log("add cmt success", ob);
+            })
+            .catch(err => {
+                console.log("add cmt err", err);
+            })
         console.log(cmts);
     }
 
@@ -84,29 +86,29 @@ export default function PostCard() {
         <Card variant="outlined" sx={{ maxWidth: "auto" }}>
             <CardHeader
                 avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                        R
-                    </Avatar>
+                    <a href={`/@${post.author}`} title={post.author}>
+                        <Avatar sx={{ bgcolor: red[500] }}>
+                        </Avatar>
+                    </a>
                 }
-                title="Shrimp and Chorizo Paella"
-                subheader="September 14, 2016"
+
+                title={post.title}
+                subheader={getDateFromTimeStamp( post.date )}
             />
             <CardMedia
                 component="img"
                 height="auto"
                 sx={{ maxHeight: "500px" }}
-                image="https://images.unsplash.com/photo-1653762381140-bc305337dc8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-                alt="Paella dish"
+                image={post.media}
+                alt={post.title}
             />
 
             {/* <ReactWebMediaPlayer title="test video" video="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4" /> */}
-            <video controls loop src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4" ></video>
-            <video controls loop src="https://dl.espressif.com/dl/audio/ff-16b-2c-44100hz.mp3" ></video>
+            {/* <video controls loop src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4" ></video>
+            <video controls loop src="https://dl.espressif.com/dl/audio/ff-16b-2c-44100hz.mp3" ></video> */}
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                    This impressive paella is a perfect party dish and a fun meal to cook
-                    together with your guests. Add 1 cup of frozen peas along with the mussels,
-                    if you like.
+                  { post.desc }
                 </Typography>
             </CardContent>
 
@@ -181,11 +183,11 @@ export default function PostCard() {
                         ))
                     }
 
-                    <Paper style={{ padding: "20px 20px" }}>
+                    {/* <Paper style={{ padding: "20px 20px" }}>
                         <Grid container wrap="nowrap" spacing={2}>
 
                             <Grid item>
-                                <Avatar alt="Remy Sharp" src={imgLink} />
+                                <Avatar alt="Remy Sharp" src={post.media} />
                             </Grid>
 
                             <Grid item xs zeroMinWidth>
@@ -207,7 +209,7 @@ export default function PostCard() {
                             </Grid>
                         </Grid>
 
-                    </Paper>
+                    </Paper> */}
 
                 </Drawer>
 

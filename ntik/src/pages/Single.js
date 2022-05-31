@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "../assets/css/app.css";
 
-
-import cx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import PostCard from "../components/PostCard";
-import VideoGrid from "../components/VideoGrid";
+import PostGrid from "../components/PostGrid";
+
+import { useParams } from "react-router-dom";
 
 
 // const { networkId } = getConfig(process.env.NODE_ENV || 'development')
@@ -15,17 +15,42 @@ import VideoGrid from "../components/VideoGrid";
 function Single() {
     const [showNotification, setShowNotification] = useState(false)
     const [loading, setload] = useState(null);
-    const [data, setData] = useState([
-        {
-            video: [],
-            author: [],
-            title: [],
-        },
-    ]);
+    const [post, setPost] = useState({});
+    const [posts, setPosts] = useState([]);
+    const [cmts, setCmts] = useState([]);
+    const params = useParams();
+
 
     useEffect(() => {
-
         console.log("init single page ");
+
+        //get post 
+        window.contract.getPost( { accountId: params.walletid ,  postId: params.postid} )
+        .then( ob => {
+            setPost( JSON.parse(ob) );
+            console.log("get post " , JSON.parse(ob) );
+        } )
+        .catch( err =>{
+            console.log("get post err" , err );
+            // window.location.href ="/"
+        } )
+
+        // //get comment of post 
+        window.contract.getComments( { postId: params.postid, from: 0 , to: 30 } )
+        .then (ob => {
+            let arrCmts = [];
+            if( ob.length > 0  ){
+                arrCmts = ob.map( ob => JSON.parse(ob) );
+            }
+            setCmts(arrCmts);
+            console.log("arr cmts " , arrCmts);
+        })
+        .catch(err => {
+            console.log( "err get comment ", err  );
+        })
+
+        //get more posts from this authors 
+
     }, []);
 
 
@@ -48,14 +73,14 @@ function Single() {
             {
 
                 <div className="post" key={Math.random()}>
-                    <PostCard />
+                    <PostCard post={ post } cmts={cmts} />
                 </div>
 
             }
-            <div className="related-posts">
+            {/* <div className="related-posts" style={{ padding:15}}>
                 <h3>More from author</h3>
-                <VideoGrid/>
-            </div>
+                <PostGrid posts={ posts }/>
+            </div> */}
         </div>
     );
 }

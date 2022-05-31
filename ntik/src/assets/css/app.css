@@ -28,16 +28,36 @@ h2 {
   margin: 15px 0px;
 }
 
+.hideBtn {
+  display: none;
+}
+
 .btn-wrap {
   position: relative;
-  width:100%;
+  width: 100%;
 }
 
 .donate-btn {
   width: 35px !important;
-  position:absolute !important;
-  right:10px !important;
+  position: absolute !important;
+  right: 10px !important;
 
+}
+
+#loginBtn {
+  margin-top: 80%;
+  padding: 50px;
+}
+
+#loginBtn button {
+  padding: 16px;
+  border: 3px solid;
+  font-weight: bold;
+}
+
+#loginBtn .login-btn-img {
+  width: 27px;
+  margin-left: 21px;
 }
 
 .donate-btn img {
@@ -192,6 +212,20 @@ h1 {
 
 }
 
+.cmtUid {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.cmtContent {
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+a {
+  text-decoration: none !important;
+  color: unset !important;
+}
 
 @media only screen and (max-width: 550px) {
 

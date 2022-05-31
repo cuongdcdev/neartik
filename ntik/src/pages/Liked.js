@@ -1,5 +1,5 @@
 import React from "react";
-import VideoGrid from "../components/VideoGrid";
+import PostGrid from "../components/PostGrid";
 import { CssBaseline, Container, Box } from "@mui/material";
 export default function Liked() {
 
@@ -13,7 +13,7 @@ export default function Liked() {
             <CssBaseline />
             <Container maxWidth="sm" id="profile-page" >
                 <Box sx={{ bgcolor: '#cfe8fc' }} />
-                <VideoGrid />
+                <PostGrid />
             </Container>
         </>
     )

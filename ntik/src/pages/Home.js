@@ -14,17 +14,26 @@ import PostCard from "../components/PostCard";
 function Home() {
     const [showNotification, setShowNotification] = useState(false)
     const [loading, setload] = useState(null);
-    const [data, setData] = useState([
-        {
-            video: [],
-            author: [],
-            title: [],
-        },
-    ]);
+    const [postIds , setPostIds] = useState([]);
+    const [posts , setPosts] = useState([]);
 
     useEffect(() => {
-
         console.log("init home");
+
+        window.contract.getPostsId( {from: 0 , to: 30} )
+        .then( (arr )=>{
+            console.log("get arr ids " , arr );
+            arr.forEach( (pid ,accid) => {
+                window.contract.getPost( accid , pid ).then( ob =>{
+                    console.log("got 1 post " , ob );
+                    setPosts( [ JSON.parse(ob) , ...posts ] );
+                    console.log("posts now " , posts );
+                } )
+            });
+        } )
+        .catch( err => {
+            console.log(err);
+        })
     }, []);
 
 
@@ -47,7 +56,7 @@ function Home() {
             {
                 Array.from({ length: 10 }).map((e, i) => (
                     <div className="post" key={Math.random()}>
-                      <PostCard/>
+                      {/* <PostCard post=""/> */}
                     </div>
                 ))
             }

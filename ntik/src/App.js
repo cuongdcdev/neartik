@@ -6,7 +6,7 @@ import getConfig from './config'
 const { networkId } = getConfig(process.env.NODE_ENV || 'development')
 import Comment from "./components/Comment";
 import Single from "./pages/Single";
-
+import Test from "./pages/Test";
 //Uis 
 import Header from "./components/Header";
 import Home from "./pages/Home";
@@ -24,11 +24,14 @@ import Paper from '@mui/material/Paper';
 import { Person } from "@mui/icons-material";
 import { AddCircle } from "@mui/icons-material";
 import HomeIcon from '@mui/icons-material/BedroomBaby';
+import LoginBtn from "./components/LoginBtn";
 
 
 
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+
   const [showNotification, setShowNotification] = useState(false)
   const [loading, setload] = useState(null);
   const [data, setData] = useState([
@@ -38,6 +41,55 @@ function App() {
       title: [],
     },
   ]);
+
+
+  function MenuBar() {
+     return (
+      <>
+        <BrowserRouter>
+          <Box >
+            <CssBaseline />
+            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 9999 }} elevation={4}>
+              <BottomNavigation
+                showLabels
+              >
+                <BottomNavigationAction to="/" component={Link} label="Home" icon={<HomeIcon />} />
+                <BottomNavigationAction to="/upload" component={Link} label="Upload" icon={<AddCircle />} />
+                <BottomNavigationAction to="/liked" component={Link} label="Favorites" icon={<FavoriteIcon />} />
+                <BottomNavigationAction to="/profile" component={Link} label="Profile" icon={<Person />} />
+
+              </BottomNavigation>
+            </Paper>
+          </Box>
+
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/upload" element={ loggedIn ?  <Upload /> : <LoginBtn/> } />
+            <Route path="/profile" element= {loggedIn ? <Profile /> : <LoginBtn/>  }  />
+            <Route path="/liked" element={  loggedIn ? <Liked /> : <LoginBtn/>  } />
+            {/* <Route path="/comment" element={<Comment />} /> */}
+            {/* <Route path="/single" element={<Single />} /> */}
+            {/* <Route path="/test" element={<Test />} /> */}
+
+            <Route path="/@:walletid" element={<Profile/>} />
+            <Route path="/@:walletid/p:postid" element={<Single/>} />
+          </Routes>
+        </BrowserRouter>
+      </>
+    )
+    
+  }
+
+
+  React.useEffect(() => {
+    console.log("window contract: ", window.contract)
+    // in this case, we only care to query the contract when signed in
+    if (window.walletConnection.isSignedIn()) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  }, [])
 
   return (
     <div className="App">
@@ -51,7 +103,7 @@ function App() {
 
     </div>
   );
-}
+}//App 
 
 // this component gets rendered by App after the form is submitted
 function Notification() {
@@ -72,39 +124,6 @@ function Notification() {
         <div>Just now</div>
       </footer>
     </aside>
-  )
-}
-
-function MenuBar() {
-  return (
-    <>
-      <BrowserRouter>
-        <Box >
-          <CssBaseline />
-          <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 9999 }} elevation={4}>
-            <BottomNavigation
-              showLabels
-            >
-              <BottomNavigationAction to="/" component={Link} label="Home" icon={<HomeIcon />} />
-              <BottomNavigationAction to="/upload" component={Link} label="Upload" icon={<AddCircle />} />
-              <BottomNavigationAction to="/liked" component={Link} label="Favorites" icon={<FavoriteIcon />} />
-              <BottomNavigationAction to="/profile" component={Link} label="Profile" icon={<Person />} />
-              
-            </BottomNavigation>
-          </Paper>
-        </Box>
-
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/upload" element={<Upload />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/liked" element={<Liked />} />
-          <Route path="/comment" element={<Comment />} />
-          <Route path="/single" element={<Single/>} />
-        </Routes>
-      </BrowserRouter>
-
-    </>
   )
 }
 

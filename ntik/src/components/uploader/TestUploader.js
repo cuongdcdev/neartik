@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffet , useRef } from 'react'
 // import { create as ipfsHttpClient } from 'ipfs-http-client'
 import { create as ipfsHttpClient } from "ipfs-http-client";
 import { Card, CardMedia } from '@mui/material';
@@ -9,45 +9,47 @@ const ipfs = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
 
 
 
-const MediaUploader = (props) => {
+const TestUploader = (props) => {
     const [image, setImage] = useState({})
     const [imagePreview, setImagePreview] = useState('')
     const [loading, setLoading] = useState(false)
     const [uploaded, setUploaded] = useState(false)
-
     const submitEle = useRef();
 
     const createPreview = (e) => {
-        if (e.target.value) {
+        if (e.target.value !== '') {
             setImage(e.target.files[0])
             const src = URL.createObjectURL(e.target.files[0])
-            if(src && src.length > 0 )
-                setImagePreview(src)
-        } 
+            setImagePreview(src)
+
+            //trigger submit form 
+            console.log(submitEle);
+            window.setTimeout( ()=>{
+                submitEle.current.click();
+            }, 500 )
+        } else {
+            setImagePreview('')
+        }
+
     }
     // { setUrl, setSave, props}
 
     React.useEffect(() => {
         if (!props.uploadFile) return;
         console.log("upload file changed status", props.uploadFile);
-        // window.setTimeout( ()=> {
-        console.log("trigger submit ");
-        submitEle.current.click();
-
-        // } , 300 );
+        uploadFile();
     }, [props.uploadFile]);
 
 
     const uploadFile = async (e) => {
-
         setLoading(true)
         e.preventDefault()
-        console.log("trigger upload file ")
+
         try {
             const added = await ipfs.add(image)
             const url = `https://ipfs.infura.io/ipfs/${added.path}`
             props.setUrl(url)
-            // setImagePreview(url)
+            setImagePreview(url)
             setUploaded(true)
             props.setSave(true);
 
@@ -76,26 +78,28 @@ const MediaUploader = (props) => {
                             </p>
                         ) : (
                             <>
-                                <p>
+                                <Button type='submit' ref={submitEle}>
+                                    Upload Image
+                                </Button>
+                                <h5>
+                                    UPloading....
                                     {image.name}{' '}
                                     <br />
                                     {Math.round(image.size / 1000)} KB
-                                </p>
+                                </h5>
                             </>
                         )}
-
                         <Card sx={{ maxWidth: "100%" }} >
-                            {/* <CardMedia component="img" image={imagePreview} height="200" width="auto" /> */}
-                            <video src={imagePreview} controls height="200px" width="auto"></video>
+                            <CardMedia component="img" image={imagePreview} height="300" />
                         </Card>
                     </>
                 )
             } else {
                 return (
                     <div>
-                        <Card sx={{ maxWidth: "100%" }} >
-                            <video src={imagePreview} controls height="200px" width="auto"></video>    
-                        </Card>
+                        <h4>Uploading Image</h4>
+
+                        <h4>Please Wait ...</h4>
                     </div>
                 )
             }
@@ -105,34 +109,31 @@ const MediaUploader = (props) => {
     return (
         <div>
 
-            <form onSubmit={uploadFile}>
 
-                <label htmlFor="contained-button-file">
+            <label htmlFor="contained-button-file">
+
+                <form onSubmit={uploadFile}  >
                     <input required
                         id="contained-button-file"
                         accept="image/*"
                         type='file'
                         onChange={(e) => createPreview(e)}
-                        className="hideBtn"
+
                     />
-                    <Button variant="contained" component="span" startIcon={<FileUpload />} sx={{ width: "100%" }}>
+                    <button type="submit" ref={submitEle} style={{display:"none"}}>a</button>
+                    {/* <Button variant="contained" component="span" startIcon={<FileUpload />} sx={{ width: "100%" }}>
                         Upload Photo
-                    </Button>
-                </label>
+                    </Button> */}
+                    {previewAndUploadButton()}
 
-                <button
-                    id="uploadFile"
-                    type="submit"
-                    ref={submitEle}
-                    style={{ display: "none" }}>s</button>
-
-            </form>
+                </form>
 
 
-            {previewAndUploadButton()}
+            </label>
+
 
         </div>
     )
 }
 
-export default MediaUploader;
+export default TestUploader;

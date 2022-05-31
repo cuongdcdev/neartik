@@ -41,12 +41,14 @@
     "@mui/icons-material": "^5.8.0",
     "@mui/material": "^5.8.0",
     "@types/react": "^17.0.0",
-    "ipfs-http-client": "^56.0.3",
+    "ipfs-http-client": "^54.0.1",
     "near-api-js": "~0.43.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
+    "react-ipfs-uploader": "^1.2.6",
     "react-router-dom": "^6.3.0",
-    "regenerator-runtime": "~0.13.5"
+    "regenerator-runtime": "~0.13.5",
+    "uuid": "^8.3.2"
   },
   "resolutions": {
     "@babel/preset-env": "7.13.8"

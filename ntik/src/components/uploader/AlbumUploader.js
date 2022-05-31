@@ -1,6 +1,6 @@
 import React, { useState, useEffet } from 'react'
 import { create as ipfsHttpClient } from 'ipfs-http-client'
-import { Card, CardMedia, Input, IconButton, PhotoCamera } from '@mui/material'
+import { Card, CardMedia, IconButton, PhotoCamera } from '@mui/material'
 import { Button } from '@mui/material'
 import { FileUpload } from '@mui/icons-material'
 const ipfs = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
@@ -96,12 +96,12 @@ const AlbumUploader = (props) => {
 
 
             <label htmlFor="contained-button-file">
-                <Input required
+                <input required
                     id="contained-button-file"
                     type='file'
-                    accept='image/*'
+                    accept="audio/*,video/*"
                     onChange={(e) => createPreview(e)}
-                    sx={{ display: "none" }}
+                    className="hideBtn"
 
                 />
                 <Button variant="contained" component="span" startIcon={<FileUpload />} sx={{ width: "100%" }}>

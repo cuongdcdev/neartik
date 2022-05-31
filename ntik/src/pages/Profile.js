@@ -1,40 +1,69 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
-import { Avatar } from "@mui/material";
-import { deepPurple } from "@mui/material/colors";
 import { Button } from "@mui/material";
-import VideoGrid from "../components/VideoGrid";
-export default function Profile() {
+import PostGrid from "../components/PostGrid";
+import { logout } from "../utils";
+import { useParams } from "react-router-dom";
 
+
+export default function Profile() {
+    const params = useParams();
+    const [posts, setPosts] = useState([]);
+    const accountId = params.walletid ? params.walletid : window.accountId;
+
+    function showLogout() {
+        if (params.walletid == window.accountId) {
+            return (<Button color="error" size="small" variant="outlined"
+                onClick={() => { return confirm("Confirm Logout?") ? logout() : "" }}>logout</Button>)
+        }
+    }
+
+    function showUpdateProfile() {
+        if (params.walletid == window.accountId) {
+            <Button variant="contained" sx={{ width: "100%" }} >Update Profile</Button>
+        }
+    }
+
+    useEffect( ()=>{
+        window.contract.getPostsFrom( { accountId: accountId, from: 0 , to: 100}  )
+        .then( ob =>{
+            console.log("get list posts from author" , ob );
+            const postsArr = ob.map( ob =>  JSON.parse(ob));
+            console.log("postArr" , postsArr);
+            setPosts( postsArr);
+
+        } )
+        .catch( err => {
+            console.log(err);
+        } )
+    } , [] );
     return (
         <>
+
             <h2 className="heading">
-                Profile page
+                {params.walletid} <br />
+                {showLogout()}
             </h2>
 
             <CssBaseline />
             <Container maxWidth="sm" id="profile-page" >
 
-                <Box sx={{ bgcolor: '#cfe8fc' }} />
-                <Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
+                <TextField id="name" label="Name" variant="standard" InputProps={{ readOnly: true  }}
+                    sx={{ width: "100%" }}
+                    defaultValue={window.accountId} />
 
-                <TextField id="name" label="Name" variant="standard" InputProps={{ readOnly: true }} sx={{ width: "100%" }} defaultValue="cuongdc.near" />
+                <TextField id="description" label="Description"
+                    InputProps={{ readOnly: params.walletid == window.accountId }}
+                    variant="standard" multiline rows={10} sx={{ width: "100%", marginTop: "15px", marginBottom: "15px" }}
+                    defaultValue="" />
 
-                <TextField id="description" label="Description" variant="standard" multiline rows={10} sx={{ width: "100%", marginTop: "15px", marginBottom: "15px" }}
-                    defaultValue="Default value " />
-
-                <Button variant="contained" sx={{ width: "100%" }} >Save</Button>
 
                 <h2 className="heading">
-                    Your
+                    Posts
                 </h2>
-
-                <VideoGrid />
-
-
+                <PostGrid posts={ posts } />
 
 
             </Container>
