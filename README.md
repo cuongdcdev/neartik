@@ -11,13 +11,16 @@ Why NSocial?
 
 Features
 ===========
+- Run completely on-chain on powerful NEAR blockchain
 - Homepage: browse feed
 - Create post: Photo / Text / Media post, your files will be stored on IPFS - no one can take your files down
 - Favorite: Save your favorite posts!
 - Donate: Want to tip someone? Do it! 
 - Login / Logout with NEAR 
-- Run completely on-chain on powerful NEAR blockchain
 - Profile Page: view user posts and update user profile description 
+- Share: share post to other social networks
+- Comment: leave your thought!
+
 
 
 
