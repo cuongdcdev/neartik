@@ -342,3 +342,9 @@ video {
 .comment-post  button{
   transform:scale(1.5);
 }
+
+@media screen and ( min-width:800px ){
+  .comments-section #loginBtn button{
+  transform:scale(0.8);
+  }
+}

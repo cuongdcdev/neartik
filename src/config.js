@@ -1,4 +1,4 @@
-const CONTRACT_NAME = process.env.CONTRACT_NAME ||'ntik'
+const CONTRACT_NAME = process.env.CONTRACT_NAME ||'nsocial'
 
 function getConfig(env) {
   switch (env) {
