@@ -171,7 +171,7 @@ export default function SinglePost(props) {
                 </IconButton>
 
                 {/* <ShareIcon /> */}
-                <ShareBtn link={window.location.href} />
+                <ShareBtn link={`/@${post.author}/p${post.id}`} />
 
                 <IconButton aria-label='comment' onClick={openCommentSection}>
                     <CommentIcon /> ( {cmts.length} )

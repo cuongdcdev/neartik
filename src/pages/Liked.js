@@ -15,8 +15,10 @@ export default function Liked() {
         }
         return (
             <>
-                <p style={{ textAlign: center }}> Empty 😉  </p>
-                <a href="/" style={{ textAlign: center }}> 🔥 Explorer now  </a>
+                <div className="liked-404">
+                    <p>Empty 😉  </p> 
+                    <a href="/"> 🔥 Explorer now  </a>
+                </div>
             </>
 
         )
