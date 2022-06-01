@@ -312,6 +312,7 @@ video {
   color: rgba(0, 0, 0, 0.54);
 }
 
+
 .home-share-btn .share-btn {
   left:80px;
 }
@@ -336,4 +337,8 @@ video {
 
 #body video{
   min-height: 200px;
+}
+
+.comment-post  button{
+  transform:scale(1.5);
 }

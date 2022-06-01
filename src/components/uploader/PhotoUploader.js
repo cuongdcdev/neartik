@@ -21,39 +21,40 @@ const PhotoUploader = (props) => {
         if (e.target.value) {
             setImage(e.target.files[0])
             const src = URL.createObjectURL(e.target.files[0])
-            if(src && src.length > 0 )
+            if (src && src.length > 0)
                 setImagePreview(src)
-        } 
+        } else {
+            setImagePreview(false);
+        }
     }
     // { setUrl, setSave, props}
 
     React.useEffect(() => {
         if (!props.uploadFile) return;
         console.log("upload file changed status", props.uploadFile);
-        // window.setTimeout( ()=> {
-        console.log("trigger submit ");
-        submitEle.current.click();
-
-        // } , 300 );
     }, [props.uploadFile]);
 
 
     const uploadFile = async (e) => {
 
-        setLoading(true)
-        e.preventDefault()
-        console.log("trigger upload file ")
-        try {
-            const added = await ipfs.add(image)
-            const url = `https://ipfs.infura.io/ipfs/${added.path}`
-            props.setUrl(url)
-            // setImagePreview(url)
-            setUploaded(true)
-            props.setSave(true);
+        setLoading(true);
+        e.preventDefault();
+        console.log("trigger upload file ");
 
-        } catch (err) {
-            console.log('Error uploading the file : ', err)
-        }
+        //post with media 
+            try {
+                console.log("post with image ")
+                const added = await ipfs.add(image)
+                const url = `https://ipfs.infura.io/ipfs/${added.path}`
+                props.setUrl(url)
+                // setImagePreview(url)
+                setUploaded(true)
+                props.setSave(true);
+
+            } catch (err) {
+                console.log('Error uploading the file : ', err)
+            }
+
         setLoading(false)
     }
 

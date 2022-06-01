@@ -58,6 +58,10 @@ export default function PostCardHome(props) {
     }, []);
 
     function postThumbnail() {
+        if( post.type  && !post.media ){
+            return (<></>);
+        }
+        
         if (post.type == "basic") {
             return (
                 <CardMedia
@@ -122,7 +126,7 @@ export default function PostCardHome(props) {
                         </Avatar>
                     </a>
                 }
-                title={post.title}
+                title={<a href={`/@${post.author}/p${post.id}`}>{post.title}</a>}
                 subheader={getDateFromTimeStamp(post.date)}
             />
             {postThumbnail()}
@@ -141,10 +145,6 @@ export default function PostCardHome(props) {
                     <FavoriteIcon />
                 </IconButton>
 
-
-                {/* <IconButton aria-label="share">
-                    <ShareIcon />
-                </IconButton> */}
                 <div className="home-share-btn">
                     <ShareBtn link={`/@${post.author}/p${post.id}`} />
                 </div>

@@ -75,9 +75,12 @@ export default function Upload() {
 
 
     useEffect(() => {
-        console.log("rendered");
         document.querySelector("#createPost").addEventListener("click", () => {
             document.querySelector("#uploadFile").click();
+            if( !document.querySelector( "#contained-button-file").value ){
+                console.log("no media upload")
+                setSave(true);
+            }
         });
     });
 

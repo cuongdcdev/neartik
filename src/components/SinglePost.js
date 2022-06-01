@@ -10,7 +10,7 @@ import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentIcon from '@mui/icons-material/Comment';
 import { Avatar, Grid, Paper } from "@material-ui/core";
-import {  InputBase } from "@mui/material";
+import { InputBase } from "@mui/material";
 import { AddCircle } from "@mui/icons-material";
 import { v4 as uuid } from "uuid";
 import neariconimg from "../assets/img/nearicon.png";
@@ -83,6 +83,12 @@ export default function SinglePost(props) {
         console.log(cmts);
     }
     function postThumbnail() {
+
+        if (post.type && !post.media) {
+            return (<></>);
+        }
+
+
         if (post.type == "basic") {
             return (
                 <CardMedia

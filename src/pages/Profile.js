@@ -101,7 +101,7 @@ export default function Profile() {
 
                 <TextField id="description" hiddenLabel
                     InputProps={{ readOnly: params.walletid == window.accountId }}
-                    variant="standard" multiline rows={10} sx={{ width: "100%", marginTop: "15px", marginBottom: "15px" }}
+                    variant="standard" multiline rows={3} sx={{ width: "100%", marginTop: "15px", marginBottom: "15px" }}
                     defaultValue={desc}
                     inputRef={descField} />
 
