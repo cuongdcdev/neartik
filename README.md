@@ -11,6 +11,8 @@ Why NSocial?
 
 Video Demo
 ===========
+[![NSocial](https://youtube-md.vercel.app/RxcF2_OHn0s/640/360)](https://www.youtube.com/watch?v=RxcF2_OHn0s)
+
 
 
 Be part of NSocial now: 
