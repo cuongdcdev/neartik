@@ -1,8 +1,21 @@
-ntik
+NSocial - Decentralize social platform  completely on-chain on NEAR Protocol
 ==================
 
-This [React] app was initialized with [create-near-app]
 
+Why NSocial? 
+===========
+- decentralize, share what you wants without got restricted 
+- Run fully on-chain of powerful blockchain NEAR Protocol 
+-  Share your thought and get tipped with Near  
+- Your data is stored on-chain NEAR , Media files are stored on IPFS!, no one can take your files down! 
+
+Video Demo
+===========
+
+
+Be part of NSocial now: 
+===========
+https://nsocial.sctuts.com/
 
 Quick Start
 ===========
@@ -84,19 +97,3 @@ As you can see in `package.json`, this does two things:
 
 1. builds & deploys smart contract to NEAR TestNet
 2. builds & deploys frontend code to GitHub using [gh-pages]. This will only work if the project already has a repository set up on GitHub. Feel free to modify the `deploy` script in `package.json` to deploy elsewhere.
-
-
-Troubleshooting
-===============
-
-On Windows, if you're seeing an error containing `EPERM` it may be related to spaces in your path. Please see [this issue](https://github.com/zkat/npx/issues/209) for more details.
-
-
-  [React]: https://reactjs.org/
-  [create-near-app]: https://github.com/near/create-near-app
-  [Node.js]: https://nodejs.org/en/download/package-manager/
-  [jest]: https://jestjs.io/
-  [NEAR accounts]: https://docs.near.org/docs/concepts/account
-  [NEAR Wallet]: https://wallet.testnet.near.org/
-  [near-cli]: https://github.com/near/near-cli
-  [gh-pages]: https://github.com/tschaub/gh-pages
