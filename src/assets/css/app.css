@@ -262,36 +262,78 @@ video {
   padding-bottom: 50px;
 }
 
+.logo-img{
+  max-width: 30px;
+  padding-right: 5px;
+}
 #body {
   padding-top: 75px;
   padding-bottom: 75px;
   max-width: 500px;
 }
 
-.post .MuiCardHeader-title{
-  font-weight:bold;
-  font-size:16px;
+.post .MuiCardHeader-title {
+  font-weight: bold;
+  font-size: 16px;
 }
 
 .post .MuiCardHeader-subheader {
-  font-size:11px;
+  font-size: 11px;
 }
 
 .post .MuiCardContent-root .MuiTypography-body2 {
-  font-size:15px;
-  margin:0px;
-  
+  font-size: 15px;
+  margin: 0px;
+
 }
 
 
 /* single post  */
-#single-page .post .MuiPaper-root.MuiPaper-outlined{
+#single-page .post .MuiPaper-root.MuiPaper-outlined {
   border: none !important;
 
-} 
+}
 
-#single-page .single-comment-input{
-  margin-bottom:0px;
+#single-page .single-comment-input {
+  margin-bottom: 0px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 10px;
+}
+
+.share-btn {
+  position: absolute;
+  left: 115px;
+  bottom: 5px;
+}
+
+.share-btn>div>button.MuiButtonBase-root.MuiFab-root {
+  box-shadow: none !important;
+  background: none;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.home-share-btn .share-btn {
+  left:80px;
+}
+
+.comments-section #loginBtn {
+  padding:0;
+  margin-top:15px;
+  text-align:center;
+  
+}
+
+.comments-section #loginBtn button{
+  padding:5px;
+  border:2px solid gray;
+  color:gray;
+  text-transform:unset;
+}
+
+.related-post-title{
+  font-weight: bold;
+}
+
+#body video{
+  min-height: 200px;
 }

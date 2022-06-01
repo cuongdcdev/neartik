@@ -57,6 +57,7 @@ export default function Upload() {
                     console.log("saved to NEAR! ");
                     console.log(rs);
                     setLoading(false);
+                    window.location.href = "/" + "@" + postObject.author + "/p" + postObject.id
                     
                 }).catch(err => {
                     console.log(err);
@@ -135,7 +136,6 @@ export default function Upload() {
 
                     <Tabs value={menuUpload} onChange={handleMenuChange} sx={{ marginBottom: "15px" }}>
                         <Tab icon={<LocalFlorist />} label="Basic" onClick={() => setPostType("basic")} />
-                        {/* <Tab icon={<Collections />} label="Album" onClick={() => setPostType("album")} /> */}
                         <Tab icon={<OndemandVideo />} label="Media" onClick={() => setPostType("media")} />
                     </Tabs>
 

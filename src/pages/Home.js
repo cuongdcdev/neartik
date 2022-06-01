@@ -4,7 +4,6 @@ import "../assets/css/app.css";
 
 import cx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import PostCard from "../components/PostCard";
 import PostCardHome from "../components/PostCardHome";
 
 
@@ -29,6 +28,8 @@ function Home() {
             .catch(err => {
                 console.log(err);
             })
+
+            window.document.title = "NSocial"
     }, []);
 
     useEffect(() => {
@@ -38,7 +39,7 @@ function Home() {
             if (accid && pid)
                 window.contract.getPost({ accountId: accid, postId: pid }).then(ob => {
                     console.log("got 1 post ", ob);
-                    setPosts( posts =>  [JSON.parse(ob), ...posts]);
+                    setPosts(posts => [JSON.parse(ob), ...posts]);
                     console.log("posts now ", posts);
                 })
         });

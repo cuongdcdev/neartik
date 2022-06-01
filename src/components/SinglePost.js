@@ -8,16 +8,16 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import CommentIcon from '@mui/icons-material/Comment';
-
 import { Avatar, Grid, Paper } from "@material-ui/core";
-import { Drawer, InputBase } from "@mui/material";
-import { Close } from "@mui/icons-material";
+import {  InputBase } from "@mui/material";
 import { AddCircle } from "@mui/icons-material";
 import { v4 as uuid } from "uuid";
 import neariconimg from "../assets/img/nearicon.png";
 import DonateBox from "./DonateBox";
+import ShareBtn from "./ShareBtn";
+import LoginBtn from "./LoginBtn";
+import { toggleFavorite, isFavorite } from "../utils";
 
 // import ReactWebMediaPlayer from 'react-web-media-player';
 
@@ -33,12 +33,15 @@ export default function SinglePost(props) {
     const [post, setPost] = useState({});
     const [expandComment, setExpandComment] = React.useState(false);
     const [donate, setDonate] = React.useState(false);
+    const [fav, setFav] = useState(false);
 
     //comment feature
     const openCommentSection = () => {
         setExpandComment(!expandComment);
         console.log("set expandcomment", expandComment);
     }
+
+
     const openDonateSection = () => {
         setDonate(true);
         console.log("open donate section ")
@@ -47,12 +50,12 @@ export default function SinglePost(props) {
     const inputRef = useRef(null);
     const [cmts, setCmts] = useState([]);
 
-    useEffect(() => {
-        setCmts(props.cmts);
-        setPost(props.post);
-        console.log("posts ", props.post, props.cmts);
-    }, []);
 
+    function toggleFav() {
+        console.log("post fav", post)
+        toggleFavorite(post.id, post);
+        setFav(!fav);
+    }
 
     function addComment() {
         var inputCmt = inputRef.current.value;
@@ -101,6 +104,35 @@ export default function SinglePost(props) {
         }
     }
 
+    function commentInput() {
+        if (window.accountId)
+            return (
+                <Grid container wrap="nowrap">
+                    <InputBase inputRef={inputRef}
+                        sx={{ ml: 1, flex: 1 }}
+                        placeholder="Leave a comment"
+                        className="single-comment-input"
+                    />
+                    <IconButton type="button" onClick={() => { addComment() }} sx={{ p: '10px' }}>
+                        <AddCircle />
+                    </IconButton>
+                </Grid>
+            )
+        return (
+            <LoginBtn text={"Login with NEAR to leave comment "} />
+        )
+    }
+
+    useEffect(() => {
+        setCmts(props.cmts);
+        setPost(props.post);
+        console.log("posts ", props.post, props.cmts);
+        window.document.title = props.post.title;
+        setFav(isFavorite(props.post.id) ? true : false);
+
+    }, []);
+
+
     return (
 
         <Card variant="outlined" sx={{ maxWidth: "auto" }}>
@@ -128,13 +160,12 @@ export default function SinglePost(props) {
 
             <CardActions disableSpacing className="btn-wrap">
 
-                <IconButton aria-label="add to favorites">
+                <IconButton aria-label="add to favorites" style={{ color: fav ? "red" : "unset" }} onClick={toggleFav} >
                     <FavoriteIcon />
                 </IconButton>
 
-                <IconButton aria-label="share">
-                    <ShareIcon />
-                </IconButton>
+                {/* <ShareIcon /> */}
+                <ShareBtn link={window.location.href} />
 
                 <IconButton aria-label='comment' onClick={openCommentSection}>
                     <CommentIcon /> ( {cmts.length} )
@@ -154,17 +185,7 @@ export default function SinglePost(props) {
 
 
                 <Paper style={{ zIndex: 9999, width: "100%" }} className="comment-post">
-
-                    <Grid container wrap="nowrap">
-                        <InputBase inputRef={inputRef}
-                            sx={{ ml: 1, flex: 1 }}
-                            placeholder="Leave a comment"
-                            className="single-comment-input"
-                        />
-                        <IconButton type="button" onClick={() => { addComment() }} sx={{ p: '10px' }}>
-                            <AddCircle />
-                        </IconButton>
-                    </Grid>
+                    {commentInput()}
                 </Paper>
 
                 <div style={{ paddingBottom: "25px", paddingTop: "25px" }}></div>

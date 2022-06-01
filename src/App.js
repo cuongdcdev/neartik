@@ -4,7 +4,6 @@ import { BrowserRouter, Link, Routes, Route } from 'react-router-dom'
 import { login, logout } from './utils'
 import getConfig from './config'
 const { networkId } = getConfig(process.env.NODE_ENV || 'development')
-import Comment from "./components/Comment";
 import Single from "./pages/Single";
 import Test from "./pages/Test";
 //Uis 

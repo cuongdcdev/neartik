@@ -18,7 +18,9 @@ import { AddCircle } from "@mui/icons-material";
 import { v4 as uuid } from "uuid";
 import neariconimg from "../assets/img/nearicon.png";
 import DonateBox from "./DonateBox";
-
+import ShareBtn from "./ShareBtn";
+import { isFavorite, toggleFavorite } from "../utils";
+import LoginBtn from "./LoginBtn";
 // import ReactWebMediaPlayer from 'react-web-media-player';
 
 
@@ -101,6 +103,30 @@ export default function PostCard(props) {
         }
     }
 
+    function commentInput() {
+        if (window.accountId)
+            return (
+                <Paper style={{ padding: "15px", position: "fixed", bottom: "50px", zIndex: 9999, width: "100%" }} className="comment-post">
+                    <Grid container wrap="nowrap" spacing={2}>
+                        <InputBase inputRef={inputRef}
+                            sx={{ ml: 1, flex: 1 }}
+                            placeholder="Leave a comment"
+                        />
+                        <IconButton type="button" onClick={() => { addComment() }} sx={{ p: '10px' }}>
+                            <AddCircle />
+                        </IconButton>
+                    </Grid>
+                </Paper>
+            )
+        return (
+            <Paper style={{ padding: "15px", position: "fixed", bottom: "50px", zIndex: 9999, width: "100%" }} className="comment-post">
+                <Grid container wrap="nowrap" spacing={2}>
+                    <LoginBtn />
+                </Grid>
+            </Paper>
+        )
+    }
+
     return (
 
         <Card variant="outlined" sx={{ maxWidth: "auto" }}>
@@ -117,11 +143,6 @@ export default function PostCard(props) {
             />
 
             {postThumbnail()}
-
-
-            {/* <ReactWebMediaPlayer title="test video" video="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4" /> */}
-            {/* <video controls loop src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4" ></video>
-            <video controls loop src="https://dl.espressif.com/dl/audio/ff-16b-2c-44100hz.mp3" ></video> */}
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
                     <a href={`/@${post.author}/p${post.id}`} >
@@ -132,13 +153,13 @@ export default function PostCard(props) {
 
             <CardActions disableSpacing className="btn-wrap">
 
-                <IconButton aria-label="add to favorites">
+                <IconButton aria-label="add to favorites" onClick={() => { toggleFavorite(post.id, post) }} style={{ color: isFavorite(post.id) ? "red" : "auto" }} >
                     <FavoriteIcon />
                 </IconButton>
 
-                <IconButton aria-label="share">
-                    <ShareIcon />
-                </IconButton>
+                <div className="home-share-btn">
+                    <ShareBtn link={`/@${post.author}/p${post.id}`} />
+                </div>
 
                 <IconButton aria-label='comment' onClick={openCommentSection}>
                     <CommentIcon />
@@ -166,17 +187,7 @@ export default function PostCard(props) {
                         </IconButton>
                     </div>
 
-                    <Paper style={{ padding: "15px", position: "fixed", bottom: "50px", zIndex: 9999, width: "100%" }} className="comment-post">
-                        <Grid container wrap="nowrap" spacing={2}>
-                            <InputBase inputRef={inputRef}
-                                sx={{ ml: 1, flex: 1 }}
-                                placeholder="Leave a comment"
-                            />
-                            <IconButton type="button" onClick={() => { addComment() }} sx={{ p: '10px' }}>
-                                <AddCircle />
-                            </IconButton>
-                        </Grid>
-                    </Paper>
+                    {commentInput()}
 
                     <div style={{ paddingBottom: "25px", paddingTop: "25px" }}></div>
 

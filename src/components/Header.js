@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import nearimg from "../assets/img/nearicon.png";
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', '<b style="color:red">Logout</b>'];
@@ -37,9 +38,7 @@ const Header = () => {
                     <Box sx={{ flexGrow: 1 }}>
 
                     </Box>
-
-                    <AdbIcon sx={{ mr: 1 }} />
-
+                    <img src={nearimg} className="logo-img" />
                     <Typography
                         variant="h5"
                         noWrap
@@ -57,11 +56,11 @@ const Header = () => {
                             textDecoration: 'none',
                         }}
                     >
-                        NSocial
+                        <a href="/">
+                            Social</a>
                     </Typography>
 
 
-                    
                 </Toolbar>
             </Container>
         </AppBar>

@@ -18,6 +18,8 @@ import { AddCircle } from "@mui/icons-material";
 import { v4 as uuid } from "uuid";
 import neariconimg from "../assets/img/nearicon.png";
 import DonateBox from "./DonateBox";
+import ShareBtn from "./ShareBtn";
+import { toggleFavorite, isFavorite } from "../utils";
 
 // import ReactWebMediaPlayer from 'react-web-media-player';
 
@@ -33,6 +35,7 @@ export default function PostCardHome(props) {
     const [post, setPost] = useState({});
     const [expandComment, setExpandComment] = React.useState(false);
     const [donate, setDonate] = React.useState(false);
+    const [fav, setFav] = useState(false);
 
     //comment feature
     const openCommentSection = () => {
@@ -51,6 +54,7 @@ export default function PostCardHome(props) {
         setCmts(props.cmts);
         setPost(props.post);
         console.log("posts ", props.post, props.cmts);
+        setFav( isFavorite(props.post.id) ? true : false );
     }, []);
 
     function postThumbnail() {
@@ -100,6 +104,12 @@ export default function PostCardHome(props) {
         console.log(cmts);
     }
 
+    function toggleFav() {
+        console.log("post fav", post)
+        toggleFavorite(post.id, post);
+        setFav(!fav);
+    }
+
 
     return (
 
@@ -127,13 +137,17 @@ export default function PostCardHome(props) {
 
             <CardActions disableSpacing className="btn-wrap">
 
-                <IconButton aria-label="add to favorites">
+                <IconButton aria-label="add to favorites" style={{ color: fav ? "red" : "unset" }} onClick={toggleFav} >
                     <FavoriteIcon />
                 </IconButton>
 
-                <IconButton aria-label="share">
+
+                {/* <IconButton aria-label="share">
                     <ShareIcon />
-                </IconButton>
+                </IconButton> */}
+                <div className="home-share-btn">
+                    <ShareBtn link={`/@${post.author}/p${post.id}`} />
+                </div>
 
                 <IconButton aria-label='comment'>
                     <a href={`/@${post.author}/p${post.id}`} >
@@ -146,7 +160,8 @@ export default function PostCardHome(props) {
                 </IconButton>
             </CardActions>
             {/* donate section   */}
-            <DonateBox setDonate={setDonate} donate={donate} />
+            <DonateBox setOpen={setDonate} open={donate} receiver={post.author} />
+
             {/* end donate section  */}
 
             {/* comment section  */}
@@ -205,7 +220,7 @@ export default function PostCardHome(props) {
 
             </div>
             {/* end comment section  */}
-        </Card>
+        </Card >
 
     );
 }
