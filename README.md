@@ -4,14 +4,26 @@ NSocial - Decentralize social platform  completely on-chain on NEAR Protocol
 
 Why NSocial? 
 ===========
-- decentralize, share what you wants without got restricted 
+- Decentralize, share what you wants without got restricted 
 - Run fully on-chain of powerful blockchain NEAR Protocol 
 -  Share your thought and get tipped with Near  
 - Your data is stored on-chain NEAR , Media files are stored on IPFS!, no one can take your files down! 
 
+Features
+===========
+- Homepage: browse feed
+- Create post: Photo / Text / Media post, your files will be stored on IPFS - no one can take your files down
+- Favorite: Save your favorite posts!
+- Donate: Want to tip someone? Do it! 
+- Login / Logout with NEAR 
+- Run completely on-chain on powerful NEAR blockchain
+- Profile Page: view user posts and update user profile description 
+
+
+
 Video Demo
 ===========
-[![NSocial](https://youtube-md.vercel.app/RxcF2_OHn0s/640/360)](https://www.youtube.com/watch?v=RxcF2_OHn0s)
+[![NSocial](https://i3.ytimg.com/vi/RxcF2_OHn0s/maxresdefault.jpg)](https://www.youtube.com/watch?v=RxcF2_OHn0s)
 
 
 
