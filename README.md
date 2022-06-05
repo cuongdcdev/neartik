@@ -22,6 +22,10 @@ Features
 - Comment: leave your thought!
 
 
+Team introduction
+===========
+
+I worked solo on this project, learned pretty much new things. 
 
 
 Video Demo
